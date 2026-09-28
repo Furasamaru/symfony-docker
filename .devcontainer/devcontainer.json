@@ -1,0 +1,41 @@
+{
+    "name": "Symfony Docker",
+    "dockerComposeFile": [
+        "../compose.yaml",
+        "../compose.override.yaml",
+        "compose.devcontainer.yaml"
+    ],
+    "service": "php",
+    "workspaceFolder": "/app",
+    "features": {
+        "ghcr.io/devcontainers/features/node:1": {}
+    },
+    "remoteUser": "nonroot",
+    "remoteEnv": {
+        "XDG_DATA_HOME": "/home/nonroot/.local/share",
+        "XDG_CONFIG_HOME": "/home/nonroot/.config"
+    },
+    "postCreateCommand": "npm install -g intelephense && ln -sf .devcontainer/AGENTS.md AGENTS.md",
+    "postStartCommand": "sudo .devcontainer/init-firewall.sh",
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "kilocode.kilo-code",
+                "bmewburn.vscode-intelephense-client",
+                "xdebug.php-debug"
+            ],
+            "settings": {
+                "launch": {
+                    "version": "0.2.0",
+                    "configurations": [
+                        {
+                            "name": "Debug PHP",
+                            "type": "php",
+                            "request": "launch"
+                        }
+                    ]
+                }
+            }
+        }
+    }
+}
